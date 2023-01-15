@@ -87,6 +87,10 @@ class LinkFooter extends React.PureComponent {
           {' · '}
           v{version}
         </p>
+
+        <p>
+          Powered By <a href="https://crxb.cc" target="_blank">CRXB Industries</a>
+        </p>
       </div>
     );
   }

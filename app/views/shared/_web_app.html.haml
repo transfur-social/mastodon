@@ -5,6 +5,7 @@
     = preload_pack_asset 'features/notifications.js', crossorigin: 'anonymous'
 
   %meta{ name: 'applicationServerKey', content: Rails.configuration.x.vapid_public_key }
+  %a{style:'display:none;', rel:'me', href:'https://transfur.social/@craftxbox'}
 
   = render_initial_state
   = javascript_pack_tag 'application', crossorigin: 'anonymous'
