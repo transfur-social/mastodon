@@ -17,11 +17,11 @@ module Mastodon
     end
 
     def flags
-      ''
+      '-dirty'
     end
 
     def suffix
-      ''
+      '+21393'
     end
 
     def to_a
