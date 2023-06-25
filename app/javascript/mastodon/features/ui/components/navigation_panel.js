@@ -88,7 +88,7 @@ class NavigationPanel extends React.Component {
             <ColumnLink transparent to='/favourites' icon='star' text={intl.formatMessage(messages.favourites)} />
             <ColumnLink transparent to='/lists' icon='list-ul' text={intl.formatMessage(messages.lists)} />
             {permHasEmail && (
-              <ColumnLink transparent to='/email' icon='envelope' text='Email' />
+              <ColumnLink transparent href='/email' icon='envelope' text='Email' />
             )}
             <ListPanel />
 
