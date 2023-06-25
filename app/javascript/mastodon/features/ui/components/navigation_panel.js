@@ -11,6 +11,7 @@ import ListPanel from './list_panel';
 import NotificationsCounterIcon from './notifications_counter_icon';
 import SignInBanner from './sign_in_banner';
 import NavigationPortal from 'mastodon/components/navigation_portal';
+import { PERMISSION_EMAIL_ACCESS } from '../../../permissions';
 
 const messages = defineMessages({
   home: { id: 'tabs_bar.home', defaultMessage: 'Home' },
@@ -42,7 +43,8 @@ class NavigationPanel extends React.Component {
 
   render () {
     const { intl } = this.props;
-    const { signedIn, disabledAccountId } = this.context.identity;
+    const { signedIn, disabledAccountId, permissions } = this.context.identity;
+    const permHasEmail = (permissions && ((permissions & PERMISSION_EMAIL_ACCESS) === PERMISSION_EMAIL_ACCESS));
 
     return (
       <div className='navigation-panel'>
@@ -85,7 +87,9 @@ class NavigationPanel extends React.Component {
             <ColumnLink transparent to='/bookmarks' icon='bookmark' text={intl.formatMessage(messages.bookmarks)} />
             <ColumnLink transparent to='/favourites' icon='star' text={intl.formatMessage(messages.favourites)} />
             <ColumnLink transparent to='/lists' icon='list-ul' text={intl.formatMessage(messages.lists)} />
-
+            {permHasEmail && (
+              <ColumnLink transparent to='/email' icon='envelope' text='Email' />
+            )}
             <ListPanel />
 
             <hr />
