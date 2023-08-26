@@ -83,8 +83,9 @@ export class DisplayName extends React.PureComponent<Props> {
       }
 
       let role = null;
-      if (account.get('roles')) {
-        role = (<div key='role' className={`account-role user-role-${account.getIn(['role', 'id'])}`}>{account.getIn(['role', 'name'])}</div>);
+      if (account.get('roles')[0]) {
+        let roles = account.get('roles')
+        role = (<div key='role' className={`account-role user-role-${roles[0].id}`}>{roles[0].name}</div>);
       }
 
       displayName = (

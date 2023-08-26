@@ -32,12 +32,17 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
+  # Specifies the header that your server uses for sending files.
+  config.action_dispatch.x_sendfile_header = ENV['SENDFILE_HEADER'] if ENV['SENDFILE_HEADER'].present?
+  # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for Apache
+  # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Allow to specify public IP of reverse proxy if it's needed
   config.action_dispatch.trusted_proxies = ENV['TRUSTED_PROXY_IP'].split(/(?:\s*,\s*|\s+)/).map { |item| IPAddr.new(item) } if ENV['TRUSTED_PROXY_IP'].present?
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
+  config.ssl_options = {
     redirect: {
       exclude: -> request { request.path.start_with?('/health') || request.headers["Host"].end_with?('.onion') || request.headers["Host"].end_with?('.i2p') }
     }
@@ -67,7 +72,7 @@ Rails.application.configure do
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # English when a translation cannot be found).
-  config.i18n.fallbacks = true
+  config.i18n.fallbacks = [:en]
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
