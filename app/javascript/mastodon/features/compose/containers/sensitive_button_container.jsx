@@ -12,11 +12,11 @@ import { changeComposeSensitivity } from 'mastodon/actions/compose';
 const messages = defineMessages({
   marked: {
     id: 'compose_form.sensitive.marked',
-    defaultMessage: '{count, plural, one {Media is marked as sensitive} other {Media is marked as sensitive}}',
+    defaultMessage: '{count, plural, one {Media is hidden behind spoiler} other {Media is hidden behind spoiler}}',
   },
   unmarked: {
     id: 'compose_form.sensitive.unmarked',
-    defaultMessage: '{count, plural, one {Media is not marked as sensitive} other {Media is not marked as sensitive}}',
+    defaultMessage: '{count, plural, one {Media is not hidden behind spoiler} other {Media is not hidden behind spoiler}}',
   },
 });
 
@@ -60,7 +60,7 @@ class SensitiveButton extends PureComponent {
 
           <FormattedMessage
             id='compose_form.sensitive.hide'
-            defaultMessage='{count, plural, one {Mark media as sensitive} other {Mark media as sensitive}}'
+            defaultMessage='{count, plural, one {Hide media behind spoiler} other {Hide media behind spoiler}}'
             values={{ count: mediaCount }}
           />
         </label>
