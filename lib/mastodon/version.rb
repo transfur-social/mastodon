@@ -9,7 +9,7 @@ module Mastodon
     end
 
     def minor
-      1
+      2
     end
 
     def patch
@@ -17,11 +17,11 @@ module Mastodon
     end
 
     def flags
-      '-dirty'
+      ENV.fetch('MASTODON_VERSION_FLAGS', '-beta2')
     end
 
     def suffix
-      '+21393'
+      ENV.fetch('MASTODON_VERSION_SUFFIX', '')
     end
 
     def to_a
