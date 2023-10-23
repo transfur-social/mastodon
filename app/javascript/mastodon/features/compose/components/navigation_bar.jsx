@@ -21,6 +21,11 @@ export default class NavigationBar extends ImmutablePureComponent {
 
   render () {
     const username = this.props.account.get('acct')
+    let role = null;
+    if (this.props.account.getIn(['roles',0])) {
+      role = (<div key='role' className={`account-role user-role-${this.props.account.getIn(['roles',0,'id'])}`}> {this.props.account.getIn(['roles',0,'name'])}</div>);
+    }
+
     return (
       <div className='navigation-bar'>
         <Link to={`/@${username}`}>
@@ -31,7 +36,7 @@ export default class NavigationBar extends ImmutablePureComponent {
         <div className='navigation-bar__profile'>
           <span>
             <Link to={`/@${username}`}>
-              <strong className='navigation-bar__profile-account'>@{username}</strong>
+              <strong className='navigation-bar__profile-account'>@{username} {role}</strong>
             </Link>
           </span>
 
