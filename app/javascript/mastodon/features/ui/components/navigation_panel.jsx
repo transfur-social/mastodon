@@ -14,6 +14,7 @@ import ExploreActiveIcon from '@/material-icons/400-24px/explore-fill.svg?react'
 import ExploreIcon from '@/material-icons/400-24px/explore.svg?react';
 import ModerationIcon from '@/material-icons/400-24px/gavel.svg?react';
 import HomeActiveIcon from '@/material-icons/400-24px/home-fill.svg?react';
+import MailIcon from '@/material-icons/400-24px/mail.svg?react';
 import HomeIcon from '@/material-icons/400-24px/home.svg?react';
 import ListAltActiveIcon from '@/material-icons/400-24px/list_alt-fill.svg?react';
 import ListAltIcon from '@/material-icons/400-24px/list_alt.svg?react';
@@ -35,7 +36,7 @@ import { NavigationPortal } from 'mastodon/components/navigation_portal';
 import { identityContextPropShape, withIdentity } from 'mastodon/identity_context';
 import { timelinePreview, trendsEnabled } from 'mastodon/initial_state';
 import { transientSingleColumn } from 'mastodon/is_mobile';
-import { canManageReports, canViewAdminDashboard } from 'mastodon/permissions';
+import { canManageReports, canViewAdminDashboard, canHaveEmailInbox } from 'mastodon/permissions';
 import { selectUnreadNotificationGroupsCount } from 'mastodon/selectors/notifications';
 
 import ColumnLink from './column_link';
@@ -177,6 +178,8 @@ class NavigationPanel extends Component {
               <ColumnLink transparent to='/favourites' icon='star' iconComponent={StarIcon} activeIconComponent={StarActiveIcon} text={intl.formatMessage(messages.favourites)} />
               <ColumnLink transparent to='/lists' icon='list-ul' iconComponent={ListAltIcon} activeIconComponent={ListAltActiveIcon} text={intl.formatMessage(messages.lists)} />
 
+              {canHaveEmailInbox(permissions) && <ColumnLink transparent href='/email' icon='envelope' iconComponent={MailIcon} text='Email' />}
+              
               <ListPanel />
 
               <hr />

@@ -27,6 +27,7 @@
 #  edited_at                    :datetime
 #  trendable                    :boolean
 #  ordered_media_attachment_ids :bigint(8)        is an Array
+#  content_type                 :string
 #
 
 class Status < ApplicationRecord
@@ -98,6 +99,7 @@ class Status < ApplicationRecord
   validates_with StatusLengthValidator
   validates_with DisallowedHashtagsValidator
   validates :reblog, uniqueness: { scope: :account }, if: :reblog?
+  validates :content_type, inclusion: { in: %w(text/plain text/markdown text/html) }, allow_nil: true
   validates :visibility, exclusion: { in: %w(direct limited) }, if: :reblog?
 
   accepts_nested_attributes_for :poll

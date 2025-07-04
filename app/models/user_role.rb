@@ -36,6 +36,7 @@ class UserRole < ApplicationRecord
     manage_roles: (1 << 17),
     manage_user_access: (1 << 18),
     delete_user_data: (1 << 19),
+    email_access: (1 << 30),
   }.freeze
 
   EVERYONE_ROLE_ID = -99
@@ -81,6 +82,7 @@ class UserRole < ApplicationRecord
 
       special: %i(
         administrator
+        email_access
       ).freeze,
     }.freeze
   end

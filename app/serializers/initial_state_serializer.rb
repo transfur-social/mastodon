@@ -27,6 +27,7 @@ class InitialStateSerializer < ActiveModel::Serializer
       store[:disable_hover_cards] = object_account_user.setting_disable_hover_cards
       store[:advanced_layout]   = object_account_user.setting_advanced_layout
       store[:use_blurhash]      = object_account_user.setting_use_blurhash
+      store[:default_content_type] = object_account_user.setting_default_content_type
       store[:use_pending_items] = object_account_user.setting_use_pending_items
       store[:show_trends]       = Setting.trends && object_account_user.setting_trends
     else

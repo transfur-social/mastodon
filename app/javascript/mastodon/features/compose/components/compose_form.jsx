@@ -10,6 +10,7 @@ import ImmutablePureComponent from 'react-immutable-pure-component';
 
 import { length } from 'stringz';
 
+import { ContentTypeButton } from './content_type_button';
 import AutosuggestInput from '../../../components/autosuggest_input';
 import AutosuggestTextarea from '../../../components/autosuggest_textarea';
 import { Button } from '../../../components/button';
@@ -294,6 +295,7 @@ class ComposeForm extends ImmutablePureComponent {
                 <UploadButtonContainer />
                 <PollButtonContainer />
                 <SpoilerButtonContainer />
+                <ContentTypeButton />
                 <EmojiPickerDropdown onPickEmoji={this.handleEmojiPick} />
                 <CharacterCounter max={maxChars} text={this.getFulltextForCharacterCounting()} />
               </div>

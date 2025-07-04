@@ -43,6 +43,7 @@
  * @property {boolean=} use_pending_items
  * @property {string} version
  * @property {string} sso_redirect
+ * @property {string} default_content_type
  */
 
 /**
@@ -118,6 +119,8 @@ export const criticalUpdatesPending = initialState?.critical_updates_pending;
 // @ts-expect-error
 export const statusPageUrl = getMeta('status_page_url');
 export const sso_redirect = getMeta('sso_redirect');
+
+export const defaultContentType = getMeta('default_content_type');
 
 /**
  * @returns {string | undefined}

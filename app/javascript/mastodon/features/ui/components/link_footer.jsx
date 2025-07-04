@@ -86,6 +86,10 @@ class LinkFooter extends PureComponent {
           {DividingCircle}
           <span className='version'>v{version}</span>
         </p>
+
+        <p>
+          Powered By <a href="https://crxb.cc" target="_blank">CRXB Industries</a>
+        </p>
       </div>
     );
   }

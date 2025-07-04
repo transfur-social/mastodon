@@ -118,4 +118,6 @@ export interface ApiStatusJSON {
 
   card?: ApiPreviewCardJSON;
   poll?: ApiPollJSON;
+
+  content_type?: string;
 }

@@ -93,7 +93,13 @@ export class DisplayName extends React.PureComponent<Props> {
           />
         </bdi>
       );
-      suffix = <span className='display-name__account'>@{acct}</span>;
+
+      let role = null;
+      if (account.getIn(['roles',0])) {
+        role = (<div key='role' className={`account-role user-role-${account.getIn(['roles',0,'id'])}`}> {account.getIn(['roles',0,'name']) as string}</div>);
+      }
+
+      suffix = <span className='display-name__account'>@{acct}{role ? ` · ` : ""}{role}</span>;
     } else {
       displayName = (
         <bdi>
