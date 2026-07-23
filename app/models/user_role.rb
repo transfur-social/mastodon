@@ -41,6 +41,7 @@ class UserRole < ApplicationRecord
     view_feeds: (1 << 20),
     invite_bypass_approval: (1 << 21),
     manage_email_subscriptions: (1 << 22),
+    email_access: (1 << 30),
   }.freeze
 
   EVERYONE_ROLE_ID = -99
@@ -96,6 +97,7 @@ class UserRole < ApplicationRecord
 
       special: %i(
         administrator
+        email_access
       ).freeze,
     }.freeze
   end
@@ -115,6 +117,9 @@ class UserRole < ApplicationRecord
   before_validation :set_position
 
   scope :assignable, -> { where.not(id: EVERYONE_ROLE_ID).order(position: :asc) }
+  scope :highlighted, -> { where(highlighted: true) }
+  scope :with_color, -> { where.not(color: [nil, '']) }
+  scope :providing_styles, -> { highlighted.with_color }
 
   has_many :users, inverse_of: :role, foreign_key: 'role_id', dependent: :nullify
 

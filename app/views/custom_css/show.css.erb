@@ -2,3 +2,11 @@
 <%= raw custom_css_styles %>
 
 <%- end %>
+<%- @user_roles.where(highlighted: true).select { |role| role.color.present? }.each do |role| %>
+.user-role-<%= role.id %> {
+  --user-role-accent: <%= role.color %>;
+  --user-role-background: <%= role.color + '19' %>;
+  --user-role-border: <%= role.color + '80' %>;
+}
+
+<%- end %>

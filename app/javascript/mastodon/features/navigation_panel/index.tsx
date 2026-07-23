@@ -11,6 +11,9 @@ import { animated, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 
 import { useAccount } from '@/mastodon/hooks/useAccount';
+import MailIcon from '@/material-icons/400-24px/mail.svg?react';
+import ModerationIcon from '@/material-icons/400-24px/gavel.svg?react';
+import AdministrationIcon from '@/material-icons/400-24px/manufacturing.svg?react';
 import AddIcon from '@/material-icons/400-24px/add.svg?react';
 import AlternateEmailIcon from '@/material-icons/400-24px/alternate_email.svg?react';
 import BookmarksActiveIcon from '@/material-icons/400-24px/bookmarks-fill.svg?react';
@@ -46,7 +49,7 @@ import {
   me,
 } from 'mastodon/initial_state';
 import { transientSingleColumn } from 'mastodon/is_mobile';
-import { canViewFeed } from 'mastodon/permissions';
+import { canViewFeed, canManageReports, canViewAdminDashboard, canHaveEmailInbox } from 'mastodon/permissions';
 import { selectUnreadNotificationGroupsCount } from 'mastodon/selectors/notifications';
 import { useAppSelector, useAppDispatch } from 'mastodon/store';
 
@@ -113,6 +116,8 @@ const messages = defineMessages({
   },
   logout: { id: 'navigation_bar.logout', defaultMessage: 'Logout' },
   compose: { id: 'tabs_bar.publish', defaultMessage: 'New Post' },
+  administration: { id: 'navigation_bar.administration', defaultMessage: 'Administration' },
+  moderation: { id: 'navigation_bar.moderation', defaultMessage: 'Moderation' },
 });
 
 const NotificationsLink = () => {
@@ -382,6 +387,12 @@ export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = ({
 
             <li role='separator' />
 
+            {canHaveEmailInbox(permissions) && (
+              <li>
+                <ColumnLink transparent href='/email' icon='envelope' iconComponent={MailIcon} text='Email' /> 
+              </li>
+            )}
+
             <li>
               <ColumnLink
                 transparent
@@ -391,6 +402,17 @@ export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = ({
                 text={intl.formatMessage(messages.preferences)}
               />
             </li>
+            
+            {canManageReports(permissions) && (
+              <li> 
+                <ColumnLink transparent href='/admin/reports' icon='flag' iconComponent={ModerationIcon} text={intl.formatMessage(messages.moderation)} /> 
+              </li>
+             )}
+            {canViewAdminDashboard(permissions) && (
+              <li>
+                <ColumnLink transparent href='/admin/dashboard' icon='tachometer' iconComponent={AdministrationIcon} text={intl.formatMessage(messages.administration)} /> 
+              </li>
+            )}
 
             <li>
               <MoreLink />

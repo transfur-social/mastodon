@@ -11,6 +11,7 @@
 #  language                     :string
 #  local                        :boolean
 #  ordered_media_attachment_ids :bigint(8)        is an Array
+#  content_type                 :string
 #  quote_approval_policy        :integer          default(0), not null
 #  reply                        :boolean          default(FALSE), not null
 #  sensitive                    :boolean          default(FALSE), not null
@@ -122,6 +123,7 @@ class Status < ApplicationRecord
   validates_with StatusLengthValidator
   validates_with DisallowedHashtagsValidator
   validates :reblog, uniqueness: { scope: :account }, if: :reblog?
+  validates :content_type, inclusion: { in: %w(text/plain text/markdown text/html) }, allow_nil: true
 
   accepts_nested_attributes_for :poll
 

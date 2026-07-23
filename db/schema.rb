@@ -1171,6 +1171,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_150940) do
     t.string "poll_options", array: true
     t.bigint "quote_id"
     t.boolean "sensitive"
+    t.string "content_type"
     t.text "spoiler_text", default: "", null: false
     t.bigint "status_id", null: false
     t.text "text", default: "", null: false
@@ -1225,6 +1226,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_150940) do
     t.string "language"
     t.boolean "local"
     t.bigint "ordered_media_attachment_ids", array: true
+    t.string "content_type"
     t.bigint "poll_id"
     t.integer "quote_approval_policy", default: 0, null: false
     t.bigint "reblog_of_id"

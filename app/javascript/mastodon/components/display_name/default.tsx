@@ -28,6 +28,11 @@ export const DisplayNameDefault: FC<
 > = ({ account, localDomain, className, ...props }) => {
   const username = useAccountHandle(account, localDomain);
 
+  let role = null;
+  if (account?.getIn(['roles',0])) {
+    role = (<div key='role' className={`account-role user-role-${account.getIn(['roles',0,'id'])}`}> {account.getIn(['roles',0,'name']) as string}</div>);
+  }
+
   return (
     <DisplayNameWithoutDomain
       account={account}
@@ -36,7 +41,7 @@ export const DisplayNameDefault: FC<
     >
       {' '}
       <span className='display-name__account'>
-        {username ?? <Skeleton width='7ch' />}
+        {username ?? <Skeleton width='7ch' />}{role ? ` · ` : ""}{role}
       </span>
     </DisplayNameWithoutDomain>
   );

@@ -119,6 +119,7 @@ export interface ApiStatusJSON {
 
   card?: ApiPreviewCardJSON;
   poll?: ApiPollJSON;
+  content_type?: string;
   quote?: ApiQuoteJSON;
   quote_approval?: ApiQuotePolicyJSON;
 }

@@ -11,6 +11,7 @@ import type { DisplayNameProps } from './index';
 export const DisplayNameWithoutDomain: FC<
   Omit<DisplayNameProps, 'variant'> & ComponentPropsWithoutRef<'span'>
 > = ({ account, className, children, localDomain: _, ...props }) => {
+
   return (
     <AnimateEmojiProvider
       {...props}

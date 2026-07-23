@@ -312,3 +312,10 @@
     color: var(--color-text-warning);
   }
 }
+
+.account-role[class*="user-role-"] {
+  padding-inline-end: 4px;
+  color: var(--user-role-accent, var(--color-text-secondary));
+  background-color: var(--user-role-background, rgba( var(--color-bg-secondary), 0.1));
+  border: 1px solid var(--user-role-border, rgba(var(--color-bg-secondary), 0.5));
+}

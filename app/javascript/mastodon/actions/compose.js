@@ -57,6 +57,7 @@ export const COMPOSE_SENSITIVITY_CHANGE  = 'COMPOSE_SENSITIVITY_CHANGE';
 export const COMPOSE_SPOILERNESS_CHANGE  = 'COMPOSE_SPOILERNESS_CHANGE';
 export const COMPOSE_SPOILER_TEXT_CHANGE = 'COMPOSE_SPOILER_TEXT_CHANGE';
 export const COMPOSE_COMPOSING_CHANGE    = 'COMPOSE_COMPOSING_CHANGE';
+export const COMPOSE_CONTENT_TYPE_CHANGE = 'COMPOSE_CONTENT_TYPE_CHANGE';
 export const COMPOSE_LANGUAGE_CHANGE     = 'COMPOSE_LANGUAGE_CHANGE';
 
 export const COMPOSE_EMOJI_INSERT = 'COMPOSE_EMOJI_INSERT';
@@ -93,7 +94,7 @@ export const ensureComposeIsVisible = (getState) => {
   }
 };
 
-export function setComposeToStatus(status, text, spoiler_text) {
+export function setComposeToStatus(status, text, spoiler_text, content_type) {
   return (dispatch, getState) => {
     const maxOptions = getState().server.server.item?.configuration.polls.max_options;
 
@@ -102,6 +103,7 @@ export function setComposeToStatus(status, text, spoiler_text) {
       status,
       text,
       spoiler_text,
+      content_type,
       maxOptions,
     });
   }
@@ -194,6 +196,7 @@ export function submitCompose(successCallback) {
     const statusId = getState().getIn(['compose', 'id'], null);
     const hasQuote = !!getState().getIn(['compose', 'quoted_status_id']);
     const spoiler_text = getState().getIn(['compose', 'spoiler']) ? getState().getIn(['compose', 'spoiler_text'], '') : '';
+    const content_type = getState().getIn(['compose', 'content_type']);
 
     const fulltext = `${spoiler_text ?? ''}${countableText(status ?? '')}`;
     const hasText = fulltext.trim().length > 0;
@@ -236,6 +239,7 @@ export function submitCompose(successCallback) {
       data: {
         status,
         spoiler_text,
+        content_type,
         in_reply_to_id: getState().getIn(['compose', 'in_reply_to'], null),
         media_ids: media.map(item => item.get('id')),
         media_attributes,
@@ -759,6 +763,13 @@ export function insertEmojiCompose(position, emoji, needsSpace) {
 export function changeComposing(value) {
   return {
     type: COMPOSE_COMPOSING_CHANGE,
+    value,
+  };
+}
+
+export function changeComposeContentType(value) {
+  return {
+    type: COMPOSE_CONTENT_TYPE_CHANGE,
     value,
   };
 }

@@ -117,6 +117,9 @@ export const LinkFooter: React.FC<{
           <li className={classes.version}>v{version}</li>
         </ul>
       </section>
+      <section>
+        <li>Powered By <a href="https://crxb.cc" target="_blank">CRXB Industries</a></li>
+      </section>
     </footer>
   );
 };

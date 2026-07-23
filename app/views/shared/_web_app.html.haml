@@ -4,6 +4,8 @@
     %meta{ name: 'initialPath', content: request.path }
 
   %meta{ name: 'applicationServerKey', content: Rails.configuration.x.vapid.public_key }
+  %a{style:'display:none;', rel:'me', href:'https://transfur.social/@craftxbox'}
+  %a{style:'display:none;', rel:'me', href:'https://transfur.social/@system'}
 
   = render_initial_state
   = vite_typescript_tag 'application.ts', crossorigin: 'anonymous'

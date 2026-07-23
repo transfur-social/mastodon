@@ -51,12 +51,13 @@ import {
   COMPOSE_POLL_OPTION_CHANGE,
   COMPOSE_POLL_SETTINGS_CHANGE,
   COMPOSE_CHANGE_MEDIA_ORDER,
+  COMPOSE_CONTENT_TYPE_CHANGE,
   COMPOSE_SET_STATUS,
   COMPOSE_FOCUS,
 } from '../actions/compose';
 import { REDRAFT } from '../actions/statuses';
 import { STORE_HYDRATE } from '../actions/store';
-import { me } from '../initial_state';
+import { me, defaultContentType } from '../initial_state';
 import { unescapeHTML } from '../utils/html';
 import { uuid } from '../uuid';
 
@@ -67,6 +68,7 @@ const initialState = ImmutableMap({
   spoiler_text: '',
   privacy: null,
   id: null,
+  content_type: defaultContentType || 'text/plain',
   text: '',
   focusDate: null,
   caretPosition: null,
@@ -120,6 +122,7 @@ function clearAll(state) {
   return state.withMutations(map => {
     map.set('id', null);
     map.set('text', '');
+    if(defaultContentType) map.set('content_type', defaultContentType);
     map.set('spoiler', false);
     map.set('spoiler_text', '');
     map.set('is_submitting', false);
@@ -412,6 +415,10 @@ export const composeReducer = (state = initialState, action) => {
     if (!state.get('spoiler')) return state;
     return state
       .set('spoiler_text', action.text)
+      .set('idempotencyKey', uuid());
+  case COMPOSE_CONTENT_TYPE_CHANGE:
+    return state
+      .set('content_type', action.value)
       .set('idempotencyKey', uuid());
   case COMPOSE_CHANGE:
     return state
